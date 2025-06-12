@@ -28,15 +28,23 @@
             min-height: 100vh;
         }
         .container {
-            max-width: 420px;
+            max-width: 600px;
             margin: 60px auto 0 auto;
             background: #fff;
             border-radius: 20px;
             box-shadow: 0 6px 32px rgba(79,140,255,0.10), 0 1.5px 6px rgba(0,0,0,0.04);
             padding: 40px 32px 32px 32px;
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            flex-direction: row;
+            align-items: stretch;
+            justify-content: space-around;
+        }
+        .tariff {
+            width: 48%;
+            background: #f9f9f9;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
         }
         h2 {
             text-align: center;
@@ -45,26 +53,52 @@
             font-size: 1.5em;
             letter-spacing: 0.01em;
         }
-        form {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
+        h3 {
+            color: #4f8cff;
+            font-size: 1.3em;
+            margin-bottom: 10px;
         }
-        button[type="submit"] {
+        .price {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 8px;
+            color: #555;
+            text-align: left;
+            position: relative;
+            padding-left: 28px;
+            font-size: 1em;
+        }
+        li::before {
+            content: "✔";
+            color: #4f8cff;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 1.1em;
+            line-height: 1.2;
+        }
+        button {
             background: linear-gradient(90deg, #4f8cff 60%, #2563eb 100%);
             color: #fff;
             border: none;
             border-radius: 10px;
-            padding: 14px 0;
-            font-size: 1.1em;
+            padding: 12px 24px;
+            font-size: 1em;
             font-weight: 600;
             cursor: pointer;
-            margin-top: 18px;
+            margin-top: 15px;
             box-shadow: 0 2px 8px rgba(79,140,255,0.13);
             transition: background 0.2s, box-shadow 0.2s;
         }
-        button[type="submit"]:hover {
+        button:hover {
             background: linear-gradient(90deg, #2563eb 60%, #4f8cff 100%);
             box-shadow: 0 4px 16px rgba(79,140,255,0.18);
         }
@@ -73,6 +107,12 @@
             color: #4f5d75;
             margin: 32px 0 0 0;
             font-size: 1em;
+        }
+        .offer-note {
+            text-align: center;
+            color: #888;
+            font-size: 0.8em;
+            margin-top: 10px;
         }
         .back-btn {
             position: fixed;
@@ -108,6 +148,12 @@
             .container {
                 margin: 24px 8px 0 8px;
                 padding: 24px 8px 20px 8px;
+                flex-direction: column;
+                align-items: center;
+            }
+            .tariff {
+                width: 100%;
+                margin-bottom: 20px;
             }
             .back-btn {
                 left: 10px;
@@ -122,17 +168,47 @@
 <body>
     <a href="/" class="back-btn" title="Назад"><span>←</span></a>
     <div class="container">
-        <h2>Получить собственного бота<br><span style="color:#4f8cff;font-size:1.1em;">100₽</span></h2>
-        <form action="https://auth.robokassa.ru/Merchant/Index.aspx" method="GET">
-            <input type="hidden" name="MerchantLogin" value="YOUR_LOGIN">
-            <input type="hidden" name="OutSum" value="100.00">
-            <input type="hidden" name="InvId" value="1">
-            <input type="hidden" name="Description" value="Покупка Telegram-бота">
-            <input type="hidden" name="SignatureValue" value="MD5_ПОДПИСЬ">
-            <input type="hidden" name="IsTest" value="1">
-            <button type="submit">Оплатить через Robokassa</button>
-        </form>
-        <p>После оплаты бот автоматически запустится на вашем аккаунте.</p>
+        <div class="tariff">
+            <h3>Стартовый</h3>
+            <div class="price">99 ₽/мес</div>
+            <ul>
+                <li>1 юзер-бот</li>
+                <li>Базовые функции</li>
+                <li>Облачное хранение</li>
+                <li>Техподдержка</li>
+            </ul>
+            <form action="https://auth.robokassa.ru/Merchant/Index.aspx" method="GET">
+                <input type="hidden" name="MerchantLogin" value="YOUR_LOGIN">
+                <input type="hidden" name="OutSum" value="99.00">
+                <input type="hidden" name="InvId" value="2">
+                <input type="hidden" name="Description" value="Подписка на тариф Стартовый">
+                <input type="hidden" name="SignatureValue" value="MD5_ПОДПИСЬ_СТАРТОВЫЙ">
+                <input type="hidden" name="IsTest" value="1">
+                <button type="submit">Купить бота</button>
+            </form>
+            <div class="offer-note">Нажимая кнопку «Купить бота», вы принимаете <a href="/oferta.html" target="_blank">оферту</a>.</div>
+        </div>
+        <div class="tariff">
+            <h3>Продвинутый</h3>
+            <div class="price">249 ₽/мес</div>
+            <ul>
+                <li>До 3 юзер-ботов</li>
+                <li>Расширенные функции</li>
+                <li>Модерация и рассылки</li>
+                <li>Приоритетная поддержка</li>
+            </ul>
+            <form action="https://auth.robokassa.ru/Merchant/Index.aspx" method="GET">
+                <input type="hidden" name="MerchantLogin" value="YOUR_LOGIN">
+                <input type="hidden" name="OutSum" value="249.00">
+                <input type="hidden" name="InvId" value="3">
+                <input type="hidden" name="Description" value="Подписка на тариф Продвинутый">
+                <input type="hidden" name="SignatureValue" value="MD5_ПОДПИСЬ_ПРОДВИНУТЫЙ">
+                <input type="hidden" name="IsTest" value="1">
+                <button type="submit">Купить бота</button>
+            </form>
+            <div class="offer-note">Нажимая кнопку «Купить бота», вы принимаете <a href="/oferta.html" target="_blank">оферту</a>.</div>
+        </div>
     </div>
+    <p>После оплаты бот автоматически запустится на вашем аккаунте.</p>
 </body>
 </html>
