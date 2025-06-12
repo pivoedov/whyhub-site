@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <script>
-    function goBack() {
-        window.history.back();
-        return false;
-    }
+    document.addEventListener('DOMContentLoaded', function() {
+        var backBtn = document.querySelector('.back-btn');
+        if (backBtn) {
+            backBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (window.history.length > 1) {
+                    window.history.back();
+                } else {
+                    window.location.href = '/';
+                }
+            });
+        }
+    });
 </script>
 <html lang="ru">
 <head>
